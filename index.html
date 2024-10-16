@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Age calculator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: poppins;
+      }
+      .main--contanier {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .page--width {
+        width: 800px;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 19px 20px 200px 20px;
+      }
+      .input--container input {
+        max-width: 150px;
+        padding: 10px;
+        font-size: 24px;
+        border: 1px solid #000;
+        border-radius: 10px;
+      }
+      .input--container input::-webkit-outer-spin-button,
+      .input--container input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      .input--container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 50px;
+      }
+      .result--container h1 {
+        font-size: 70px;
+      }
+      .result--container span {
+        font-size: 80px;
+        color: #864cff;
+        font-weight: 800;
+      }
+      .result--container {
+        margin-top: 100px;
+      }
+      .result {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .grid label {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 5px;
+        margin-bottom: 10px;
+        color: #6e6e6e;
+      }
+      #submited--btn {
+        background-color: #000;
+        color: #fff;
+        border-radius: 50%;
+        padding: 10px;
+        float: right;
+        margin-top: 20px;
+        position: relative;
+        cursor: pointer;
+        border: none;
+      }
+      .line {
+        width: 100%;
+        height: 2px;
+        background-color: #d8d8d8;
+        position: relative;
+        top: 60px;
+      }
+      .result--main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      a#clear {
+        padding: 10px 30px;
+        font-size: 32px;
+        font-weight: 500;
+        border: none;
+        border-radius: 10px;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .message {
+        color: red;
+        margin-top: 10px;
+        position: absolute;
+        top: 90px;
+        width: 163px;
+      }
+      .day--main {
+        position: relative;
+      }
+      .month--main {
+        position: relative;
+      }
+      .year--main {
+        position: relative;
+      }
+
+      @media (max-width: 800px) {
+        .input--container input {
+          max-width: 100px;
+        }
+        .result--container h1 {
+          font-size: 30px;
+        }
+        #clear {
+          font-size: 14px;
+        }
+        .page--width {
+          max-width: 500px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Day
+  DD
+
+  Month
+  MM
+
+  Year
+  YYYY
+
+  -- years
+  -- months
+  -- days -->
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+
+    <div class="main--contanier">
+      <div class="page--width">
+        <div class="input--container">
+          <div class="day--main grid">
+            <label for="day">DAY</label>
+            <input
+              type="number"
+              name="day"
+              id="day"
+              placeholder="DD"
+              minlength="1"
+              maxlength="2"
+              value=""
+            />
+            <span id="message-day" class="message"></span>
+          </div>
+          <div class="month--main grid">
+            <label for="month">MONTH</label>
+            <input
+              type="number"
+              id="month"
+              name="month"
+              placeholder="MM"
+              minlength="1"
+              maxlength="2"
+              value=""
+            />
+            <span id="message-month" class="message"></span>
+          </div>
+
+          <div class="year--main grid">
+            <label for="year">YEAR</label>
+            <input
+              type="number"
+              name="year"
+              id="year"
+              minlength="4"
+              maxlength="4"
+              placeholder="YYYY"
+              value=""
+            />
+            <span id="message-year" class="message"></span>
+          </div>
+        </div>
+        <div class="submite--container">
+          <div class="line"></div>
+          <a id="submited--btn">
+            <img src="./assets/images/icon-arrow.svg" alt="" />
+          </a>
+        </div>
+        <div class="result--main">
+          <div class="result--container">
+            <div class="result">
+              <span id="result--year"></span>
+              <h1 class="year-h">years</h1>
+            </div>
+            <div class="result">
+              <span id="result--month"></span>
+              <h1 class="month-h">months</h1>
+            </div>
+            <div class="result">
+              <span id="result-day"></span>
+              <h1 class="day-h">days</h1>
+            </div>
+          </div>
+          <div class="clear--btn">
+            <a id="clear">Clear</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // function age() {
+
+      const outputYear = document.querySelector(".year-h");
+      const outputMonth = document.querySelector(".month-h");
+      const outputDay = document.querySelector(".day-h");
+      let submitBtn = document.querySelector("#submited--btn");
+
+      let isValid = false;
+      let inputday = document.getElementById("day");
+      let inputMonth = document.getElementById("month");
+      let inputYear = document.getElementById("year");
+
+      const errorDay = document.querySelector("#message-day");
+      const errorMonth = document.querySelector("#message-month");
+      const errorYear = document.querySelector("#message-year");
+      let clearBtn = document.querySelector("#clear");
+
+      inputday.addEventListener("input", (e) => {
+        let inputday = document.getElementById("day").value;
+        if (+inputday > 31) {
+          errorDay.textContent = "Must be valid date!";
+          isValid = false;
+          return;
+        } else {
+          isValid = true;
+          errorDay.textContent = "";
+        }
+        if (+inputday === 0) {
+          isValid = false;
+          errorDay.textContent = "This field is required!";
+          isValid = false;
+          return;
+        } else {
+          errorDay.textContent = "";
+          return;
+        }
+      });
+      inputMonth.addEventListener("input", (e) => {
+        let inputMonth = document.getElementById("month").value;
+        if (+inputMonth > 12) {
+          errorMonth.textContent = "Must be valid date!";
+          isValid = false;
+          return;
+        } else {
+          isValid = true;
+          errorMonth.textContent = "";
+        }
+        if (+inputMonth === 0) {
+          isValid = false;
+          errorMonth.textContent = "This field is required!";
+          isValid = false;
+          return;
+        } else {
+          errorMonth.textContent = "";
+        }
+      });
+      inputYear.addEventListener("input", (e) => {
+        let inputYear = document.getElementById("year").value;
+        if (+inputYear > 2024) {
+          errorYear.textContent = "Must be valid date!";
+          isValid = false;
+          return;
+        } else {
+          isValid = true;
+          errorYear.textContent = "";
+        }
+        if (+inputYear === 0) {
+          isValid = false;
+          errorYear.textContent = "This field is required!";
+          isValid = false;
+          return;
+        } else {
+          errorYear.textContent = "";
+        }
+      });
+
+      submitBtn.addEventListener("click", function () {
+        let d1 = document.getElementById("day").value;
+        let m1 = document.getElementById("month").value;
+        let y1 = document.getElementById("year").value;
+        let date = new Date();
+        let d2 = date.getDate();
+        let m2 = 1 + date.getMonth();
+        let y2 = date.getFullYear();
+        let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        if (d1 > d2) {
+          d2 = d2 + month[m2 - 1];
+          m2 = m2 - 1;
+        }
+        if (m1 > m2) {
+          m2 = m2 + 12;
+          y2 = y2 - 1;
+        }
+        let d = d2 - d1;
+        let m = m2 - m1;
+        let y = y2 - y1;
+
+        if (d1 === "") {
+          let clear = document.getElementById("result-day");
+          clear.forEach((input) => (input.value = "---"));
+        }
+        document.getElementById("result--year").innerHTML = y;
+        document.getElementById("result--month").innerHTML = m;
+        document.getElementById("result-day").innerHTML = d;
+      });
+
+      clearBtn.addEventListener("click", function () {
+        document.getElementById("result--year").innerHTML = "";
+        document.getElementById("result--month").innerHTML = "";
+        document.getElementById("result-day").innerHTML = "";
+
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => (input.value = ""));
+      });
+
+      // let yearResult = document.getElementById("result--year");
+      // let monthResult = document.getElementById("result--month");
+
+      //   function clearBtn(target) {
+      //     target.value = "";
+      //   }
+      // }
+    </script>
+  </body>
+</html>
